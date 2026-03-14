@@ -69,15 +69,17 @@ export const atualizar = async (req, res) => {
             return sendXml(res, 400, { error: 'Corpo da requisição vazio. Envie os dados!' });
         }
 
+        const dadosXml = xmlToObj(req.body);
+
         const exemplo = await ExemploModel.buscarPorId(parseInt(id));
 
         if (!exemplo) {
             return sendXml(res, 404, { error: 'Registro não encontrado para atualizar.' });
         }
 
-        if (req.body.nome !== undefined) exemplo.nome = req.body.nome;
-        if (req.body.estado !== undefined) exemplo.estado = req.body.estado;
-        if (req.body.preco !== undefined) exemplo.preco = parseFloat(req.body.preco);
+        if (dadosXml.nome !== undefined) exemplo.nome = dadosXml.nome;
+        if (dadosXml.estado !== undefined) exemplo.estado = dadosXml.estado;
+        if (dadosXml.preco !== undefined) exemplo.preco = parseFloat(dadosXml.preco);
 
         const data = await exemplo.atualizar();
 

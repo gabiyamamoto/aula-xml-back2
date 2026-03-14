@@ -5,7 +5,7 @@ import xmlRoute from './routes/xmlRoute.js';
 
 const app = express();
 app.use(express.json());
-app.use(express.text({ type: 'application/xml ' }));
+app.use(express.text({ type: 'application/xml' }));
 
 const PORT = process.env.PORT || 3000;
 
